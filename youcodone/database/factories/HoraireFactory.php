@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class HoraireFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'jour' => fake()->dayOfWeek(),
+            'heure_ouverture' => fake()->time(),
+            'heure_fermeture' => fake()->time(),
+            'restaurant_id' => Restaurant::factory(),
         ];
     }
 }

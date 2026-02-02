@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Categorie;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class PlatFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+           'nom_plat' => fake()->word(),
+           'prix_plat' => fake()->randomFloat(2, 5, 100),
+           'categorie_id' => Categorie::factory(),
         ];
     }
 }
