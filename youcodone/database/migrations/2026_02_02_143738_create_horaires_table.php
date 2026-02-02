@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('horaires', function (Blueprint $table) {
             $table->id();
+            $table->string('jour');
+            $table->time('heure_ouverture');
+            $table->time('heure_fermeture');
+            $table->foreignId('restaurant_id');
             $table->timestamps();
         });
     }

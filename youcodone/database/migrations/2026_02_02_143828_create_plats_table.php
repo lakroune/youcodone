@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('plats', function (Blueprint $table) {
             $table->id();
+            $table->string('nom_plat');
+            $table->decimal('prix_plat', 8, 2);
+            $table->foreignId('categorie_id');   
             $table->timestamps();
         });
     }

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
+            $table->string('url_photo');
+            $table->boolean('is_principal')->default(false);
+            $table->foreignId('restaurant_id');
             $table->timestamps();
         });
     }
