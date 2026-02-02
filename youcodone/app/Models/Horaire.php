@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Horaire extends Model
 {
-    //
+   protected $table = 'horaires';
+
+    protected $fillable = ['jour', 'heure_ouverture', 'heure_fermeture', 'restaurant_id'];
+
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
+    }
+    
 }

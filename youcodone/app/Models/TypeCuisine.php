@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TypeCuisine extends Model
 {
-    //
+    protected $table = 'type_cuisines';
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class);
+    }
 }
