@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Parental\HasChildren;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-    use HasChildren;
-
+    use HasFactory, Notifiable, HasChildren, HasRoles;
+    protected $guard_name = 'web';
     protected $childTypes = [
         'client' => Client::class,
         'restaurateur' => Restaurateur::class,

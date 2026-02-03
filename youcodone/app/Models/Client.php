@@ -8,6 +8,7 @@ use Parental\HasParent;
 class Client extends User
 {
     use HasParent;
+    
     protected $filable = [
         'username',
         'email',
