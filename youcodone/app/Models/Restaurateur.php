@@ -12,7 +12,7 @@ class Restaurateur extends User
         'username',
         'email',
         'password',
-        'type',
+        'role',
         'avatar',
     ];
 

@@ -13,7 +13,7 @@ class Client extends User
         'username',
         'email',
         'password',
-        'type',
+        'role',
         'nom',
         'prenom',
         'phone',

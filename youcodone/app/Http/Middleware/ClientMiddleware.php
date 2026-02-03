@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Client;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,9 @@ class ClientMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if(auth()->check() && auth()->user()->role === 'client') {
+            return $next($request);
+        }
+        return redirect('/dashboard',"403 dont have permission");
     }
 }
