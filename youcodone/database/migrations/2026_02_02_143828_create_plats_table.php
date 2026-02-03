@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom_plat');
             $table->decimal('prix_plat', 8, 2);
-            $table->foreignId('categorie_id');   
+            $table->foreignId('menu_id');   
             $table->timestamps();
         });
     }

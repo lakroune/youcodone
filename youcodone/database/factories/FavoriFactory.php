@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Client;
 use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,7 +21,7 @@ class FavoriFactory extends Factory
     {
         return [
             'restaurant_id' => Restaurant::factory(),
-            'user_id' => User::factory(),
+            'user_id' => Client::factory(),
         ];
     }
 }

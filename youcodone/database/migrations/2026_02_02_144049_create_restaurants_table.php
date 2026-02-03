@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nom_restaurant');
             $table->string('adresse_restaurant');
             $table->string('telephone_restaurant');
-            $table->string('description_restaurant')->nullable();
+            $table->text('description_restaurant')->nullable();
+            $table->string('email_restaurant')->nullable();
             $table->string('capacite_restaurant')->nullable();
             $table->foreignId('type_cuisine_id');
             $table->foreignId('user_id');
