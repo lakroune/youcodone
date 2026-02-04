@@ -16,14 +16,13 @@ class RestaurantController extends Controller
     {
         $query = Restaurant::query();
 
-        // البحث حسب المدينة، نوع المطبخ، أو الاسم (حسب الـ US)
-        if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                ->orWhere('city', 'like', '%' . $request->search . '%')
-                ->orWhere('cuisine_type', 'like', '%' . $request->search . '%');
-        }
+        // if ($request->has('search')) {
+        //     $query->where('name', 'like', '%' . $request->search . '%')
+        //         ->orWhere('city', 'like', '%' . $request->search . '%')
+        //         ->orWhere('cuisine_type', 'like', '%' . $request->search . '%');
+        // }
 
-        $restaurants = $query->latest()->get();
+        // $restaurants = $query->latest()->get();
 
         return view('home', compact('restaurants'));
     }
