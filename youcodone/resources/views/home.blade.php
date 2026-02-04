@@ -1,70 +1,65 @@
 <x-app-layout>
     <div class="relative bg-black py-20 border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white mb-6">
-                Trouvez votre <span class="text-[#FF5F00]">Table.</span>
+            <h1 class="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-8">
+                FIND YOUR <span class="text-[#FF5F00]">VIBE.</span>
             </h1>
-            
-            <form action="{{ route('home') }}" method="GET" class="max-w-3xl mx-auto mt-10">
-                <div class="flex flex-col md:flex-row gap-4 p-2 bg-[#111] border border-white/10 rounded-2xl">
-                    <input type="text" name="search" placeholder="Ville, Cuisine, Nom..." 
-                           class="flex-1 bg-transparent border-none text-white focus:ring-0 px-6 py-4"
-                           value="{{ request('search') }}">
-                    <button type="submit" class="bg-[#FF5F00] text-white font-black uppercase tracking-widest px-10 py-4 rounded-xl hover:bg-white hover:text-black transition-all">
-                        Rechercher
-                    </button>
+
+            <form action="{{ route('home') }}" method="POST" class="max-w-xl mx-auto">
+                @csrf
+                <div class="relative">
+                    <input type="text" name="search" placeholder="Rechercher..."
+                        class="w-full bg-[#111] border border-white/10 rounded-full text-white px-8 py-4 text-xs outline-none focus:border-[#FF5F00] transition-all uppercase tracking-widest"
+                        value="{{ request('search') }}">
+                    <div class="absolute right-6 top-4">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 py-20">
-        <div class="flex justify-between items-end mb-12">
-            <div>
-                <p class="text-[#FF5F00] font-black uppercase tracking-[4px] text-xs mb-2">Exploration</p>
-                <h2 class="text-white text-3xl font-black uppercase italic">Restaurants Disponibles</h2>
-            </div>
-            <span class="text-gray-600 text-xs font-bold uppercase tracking-widest">{{ $restaurants->count() }} Résultats</span>
-        </div>
+    <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach ($restaurants as $restaurant)
+                <a href="{{ route('restaurants.show', $restaurant->id) }}" class="group block">
+                    <div
+                        class="bg-[#0A0A0A] border border-white/5 rounded-2xl overflow-hidden transition-all duration-500 group-hover:border-[#FF5F00]/40">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($restaurants as $restaurant)
-                <div class="group bg-[#0A0A0A] border border-white/5 rounded-3xl overflow-hidden hover:border-[#FF5F00]/50 transition-all duration-500">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="{{ asset('storage/' . $restaurant->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        
-                        <button class="absolute top-6 right-6 p-3 bg-black/50 backdrop-blur-md rounded-full text-white hover:text-[#FF5F00] transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                        </button>
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="{{ asset('storage/' . $restaurant->image) }}"
+                                class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
 
-                        <div class="absolute bottom-4 left-6">
-                            <span class="bg-[#FF5F00] text-white text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
-                                {{ $restaurant->cuisine_type }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-white text-xl font-black uppercase italic tracking-tight">{{ $restaurant->name }}</h3>
-                            <span class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">{{ $restaurant->city }}</span>
-                        </div>
-                        
-                        <p class="text-gray-500 text-xs leading-relaxed mb-8 line-clamp-2">
-                            {{ $restaurant->description }}
-                        </p>
-
-                        <div class="flex items-center justify-between pt-6 border-t border-white/5">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-[#FF5F00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                <span class="text-white text-[10px] font-black uppercase tracking-widest">{{ $restaurant->opening_hours }}</span>
+                            <div class="absolute top-4 left-4">
+                                <span
+                                    class="bg-black/60 backdrop-blur-md text-[#FF5F00] text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded">
+                                    {{ $restaurant->cuisine_type }}
+                                </span>
                             </div>
-                            <a href=" " class="text-[10px] font-black uppercase tracking-widest text-[#FF5F00] hover:text-white transition-colors">
-                                Détails →
-                            </a>
                         </div>
+
+                        <div class="p-5">
+                            <h3
+                                class="text-white text-sm font-black uppercase tracking-tight group-hover:text-[#FF5F00] transition-colors mb-1">
+                                {{ $restaurant->name }}
+                            </h3>
+
+                            <div class="flex items-center gap-1.5 text-gray-500">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                </svg>
+                                <span class="text-[9px] font-bold uppercase tracking-widest italic leading-none">
+                                    {{ $restaurant->city }}
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </div>

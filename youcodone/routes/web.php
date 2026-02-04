@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClientConteroller;
 use App\Http\Controllers\DashboardConteroller;
+use App\Http\Controllers\HomeConteroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
+use App\Models\Client;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 
@@ -18,14 +21,16 @@ Route::middleware('auth')->group(function () {
     Route::put('profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
 });
 Route::middleware('client')->group(function () {
-    Route::get('/home', [RestaurantController::class, 'index'])->name('home');
-    Route::get('/home/{id}', [RestaurantController::class, 'show'])->name('home.show');
-
+    Route::get('/home', [HomeConteroller::class, 'index'])->name('home');
+    Route::post('/home', [HomeConteroller::class, 'search'])->name('home.search');
+    Route::put('/home', [ClientConteroller::class, 'favori'])->name('restaurant.favori');
+    Route::get('/restaurant/{restaurant}', [RestaurantController::class, 'show'])->name('restaurant.show');
 });
 
 Route::middleware('restaurateur')->group(function () {
     Route::resource('restaurants', RestaurantController::class);
     Route::get('/dashboard', [DashboardConteroller::class, 'index'])->name('dashboard');
 });
+
 
 require __DIR__ . '/auth.php';

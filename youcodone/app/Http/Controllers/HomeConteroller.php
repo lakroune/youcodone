@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class HomeConteroller extends Controller
@@ -11,54 +12,25 @@ class HomeConteroller extends Controller
      */
     public function index()
     {
-        //
+        $restaurants = Restaurant::all();
+        return view('home', compact('restaurants'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Search restaurants based on criteria.
      */
-    public function create()
+    public function search(Request $request)
     {
-        //
-    }
+        $query = Restaurant::query();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($request->has('search')) {
+            $query->where('nom_restaurant', 'like', '%' . $request->search . '%')
+                ->orWhere('adresse_restaurant', 'like', '%' . $request->search . '%');
+                // ->orWhere('cuisine_type', 'like', '%' . $request->search . '%');
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $restaurants = $query->get();//latest()->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('home', compact('restaurants'));
     }
 }
