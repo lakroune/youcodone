@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class DashboardConteroller extends Controller
@@ -12,7 +13,7 @@ class DashboardConteroller extends Controller
      */
     public function index()
     {
-        $restaurants =      Restaurant::all();
+        $restaurants = Restaurant::all()->where('user_id', Auth::user()->id);
         return view('dashboard', compact('restaurants'));
     }
 

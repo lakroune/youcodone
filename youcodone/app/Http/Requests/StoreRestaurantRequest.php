@@ -28,7 +28,7 @@ class StoreRestaurantRequest extends FormRequest
             'description_restaurant' => ['nullable', 'string'],
             'email_restaurant' => ['nullable', 'string', 'email', 'max:255'],
             'capacite_restaurant' => ['nullable', 'integer', 'max:50'],
-            'type_cuisine_id' => ['required', 'exists:type_cuisines,id'],
+            'type_cuisine_id' => ['required', 'integer', 'exists:type_cuisines,id'],
         ];
     }
 }

@@ -21,7 +21,7 @@ class HoraireController extends Controller
      */
     public function create()
     {
-        //
+        return view('horaires.create');
     }
 
     /**
@@ -29,7 +29,9 @@ class HoraireController extends Controller
      */
     public function store(StoreHoraireRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $horaire = Horaire::create($validated);
+        return view('menus.create', compact('horaire'));
     }
 
     /**

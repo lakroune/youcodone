@@ -35,10 +35,9 @@ class RestaurantController extends Controller
     public function store(StoreRestaurantRequest $request)
     {
         $validated = $request->validated();
-        $validated['user_id'] = Auth::user()->id;
-        Restaurant::create($validated);
-
-        return view('restaurants.create', compact('validated'))->with('success', 'Restaurant created successfully.');
+        $validated['user_id'] = Auth::id();
+        $restaurant = Restaurant::create($validated);
+        return view('photos.create', compact('restaurant'));
     }
 
     /**
