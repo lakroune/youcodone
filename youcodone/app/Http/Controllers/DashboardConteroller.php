@@ -13,13 +13,13 @@ class DashboardConteroller extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all()->where('user_id', Auth::user()->id);
-        $users_count = Restaurant::where('user_id', Auth::user()->id)->count();
-        return view('dashboard', compact('restaurants', 'users_count'));
-        // return view('dashboard', compact('restaurants'));
-        //
-        }
+        $restaurants = Restaurant::with('typeCuisine')
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->get();
 
+        return view('dashboard', compact('restaurants'));
+    }
     /**
      * Show the form for creating a new resource.
      */
