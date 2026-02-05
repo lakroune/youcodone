@@ -22,7 +22,9 @@ class StorePhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'restaurant_id' => ['required', 'exists:restaurants,id'],
+            'image_principale' => ['required', 'image', 'max:2048', 'mimetypes:image/jpeg,image/png'],
+            'images.*' => ['image', 'max:2048', 'mimetypes:image/jpeg,image/png'],
         ];
     }
 }

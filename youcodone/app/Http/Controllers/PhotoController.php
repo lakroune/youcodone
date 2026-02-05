@@ -35,7 +35,7 @@ class PhotoController extends Controller
         $validated['user_id'] = Auth::id();
         $photo = Photo::create($validated);
 
-        return redirect()->route('horaires.create')->with('success', 'Photos ajoutées avec succès.');
+        return view('horaires.create', compact('photo'));
     }
 
     /**
