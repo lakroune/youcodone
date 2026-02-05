@@ -40,9 +40,9 @@
                         class="group relative bg-[#0A0A0A] border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-[#FF5F00]/30 transition-all duration-500 shadow-2xl">
 
                         <div class="relative h-72 overflow-hidden">
-                            <img src="{{ asset('storage/' . $restaurant->image) }}"
+                            <img src="{{ asset('storage/' . $restaurant->photos[0]->url_photo) }}"
                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]"
-                                alt="{{ $restaurant->name }}">
+                                alt="{{ $restaurant->nom_restaurant }}">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80">
                             </div>
@@ -58,7 +58,7 @@
                             <div class="absolute bottom-6 left-8">
                                 <span
                                     class="bg-[#FF5F00] text-black text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-lg shadow-2xl">
-                                    {{ $restaurant->city }}
+                                    {{ $restaurant->adresse_restaurant }}
                                 </span>
                             </div>
                         </div>
@@ -66,13 +66,13 @@
                         <div class="p-10">
                             <div class="mb-6">
                                 <p class="text-[9px] font-bold text-[#FF5F00] uppercase tracking-[4px] mb-2">
-                                    {{ $restaurant->cuisine_type }}</p>
+                                    {{ $restaurant->typeCuisine->nom_type_cuisine }}</p>
                                 <h3 class="text-2xl font-black uppercase italic tracking-tighter text-white">
-                                    {{ $restaurant->name }}</h3>
+                                    {{ $restaurant->nom_restaurant }}</h3>
                             </div>
 
                             <div class="flex items-center justify-between">
-                                <a href="{{ route('restaurants.show', $restaurant) }}"
+                                <a href="{{ route('client.restaurant.show', $restaurant) }}"
                                     class="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[4px] text-white hover:text-[#FF5F00] transition-colors group/link">
                                     Explorer
                                     <span class="w-8 h-[1px] bg-[#FF5F00] group-hover/link:w-12 transition-all"></span>

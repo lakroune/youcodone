@@ -12,7 +12,7 @@ class HomeConteroller extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with('typeCuisine')->latest()->get();
         return view('home', compact('restaurants'));
     }
 
@@ -25,11 +25,12 @@ class HomeConteroller extends Controller
 
         if ($request->has('search')) {
             $query->where('nom_restaurant', 'like', '%' . $request->search . '%')
-                ->orWhere('adresse_restaurant', 'like', '%' . $request->search . '%');
-                // ->orWhere('cuisine_type', 'like', '%' . $request->search . '%');
+                ->orWhere('adresse_restaurant', 'like', '%' . $request->search . '%')
+                ->orWhere('description_restaurant', 'like', '%' . $request->search . '%');
+                
         }
 
-        $restaurants = $query->get();//latest()->get();
+        $restaurants = $query->get(); //latest()->get();
 
         return view('home', compact('restaurants'));
     }

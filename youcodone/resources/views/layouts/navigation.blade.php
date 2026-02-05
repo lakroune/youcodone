@@ -21,8 +21,7 @@
                 @endrole
 
                 @role('restaurateur')
-                    <a href="#" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Mes Restaurants</a>
-                    <a href="#" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Réservations Reçues</a>
+                    <a href="{{ route('restaurateur.restaurants') }}" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Mes Restaurants</a>
                 @endrole
 
                 @role('admin')

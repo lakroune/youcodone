@@ -42,35 +42,43 @@ class ProfileController extends Controller
     /**
      * Update the user's avatar.
      */
-    public function updateAvatar(Request $request): RedirectResponse
+    public function updateAvatar(Request $request)
     {
-        $validated = $request->validate([
-            'avatar' => ['required', 'image', 'max:2048', 'mimes:jpeg,png,jpg,gif'],
+        $request->validate([
+            'avatar' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ]);
+        $user = Auth::user();
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
         $path = $request->file('avatar')->store('avatars', 'public');
-        Auth::user()->update([
-            'avatar' => $path,
-        ]);
-        return Redirect::route('profile.edit')->with('status', 'avatar-updated');
+        $user->avatar = $path;
+        $user->save();
+        return redirect()->back()->with('success', 'Avatar mis à jour avec succès!');
     }
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request)
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $user = Auth::user();
 
         Auth::logout();
+
+        // Supprimer l'avatar
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
 
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return redirect('/');
     }
 }

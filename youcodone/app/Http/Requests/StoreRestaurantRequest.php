@@ -24,7 +24,7 @@ class StoreRestaurantRequest extends FormRequest
 
             'schedule' => ['required', 'array'],
             'schedule.*.open' => ['nullable', 'date_format:H:i'],
-            'schedule.*.close' => ['nullable', 'date_format:H:i', 'after:schedule.*.open'],
+            'schedule.*.close' => ['nullable', 'date_format:H:i'], //after:schedule.*.open
 
             'image_principal' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'images' => ['nullable', 'array'],

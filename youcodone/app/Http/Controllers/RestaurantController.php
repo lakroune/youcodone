@@ -18,7 +18,7 @@ class RestaurantController extends Controller
      */
     public function index(Request $request)
     {
-        $restaurant = Restaurant::all();
+        $restaurant = Restaurant::with('typeCuisine')->latest()->get();
         return view('restaurant.index', compact('restaurant'));
     }
 
@@ -109,7 +109,14 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        $restaurant->load(['photos', 'menus.plats', 'horaires', 'typeCuisine']);
+        // Charger toutes les relations nécessaires
+        $restaurant->load([
+            'photos',
+            'menus.plats',
+            'horaires',
+            'typeCuisine'
+        ]);
+
         return view('restaurants.show', compact('restaurant'));
     }
 

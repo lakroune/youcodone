@@ -83,7 +83,7 @@
                                 </a>
                             @endrole
                             @role('client')
-                                <a href="{{ url('/home') }}"
+                                <a href="{{ route('home') }}"
                                     class="flex justify-center w-full bg-[#FF5F00] text-white text-[11px] font-black py-4 rounded-lg shadow-lg shadow-[#FF5F00]/10 uppercase tracking-[2px] transition-all hover:bg-[#E65600]">
                                     Aller au page accuielle </a>
                             @endrole
