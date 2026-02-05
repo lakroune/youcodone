@@ -15,13 +15,13 @@
                 
 
                 @role('client')
-                    <a href="#" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Exploration</a>
+                    <a href="{{ route('home') }}" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Exploration</a>
                     <a href="#" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Mes Favoris</a>
                     <a href="#" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Mes Réservations</a>
                 @endrole
 
                 @role('restaurateur')
-                    <a href="{{ route('restaurateur.restaurants') }}" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Mes Restaurants</a>
+                    <a href="{{ route('restaurateur.dashboard') }}" class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Mes Restaurants</a>
                 @endrole
 
                 @role('admin')
