@@ -28,7 +28,8 @@ Route::middleware('auth')->prefix('auth')->group(function () {
 Route::middleware('client')->prefix('client')->group(function () {
     Route::get('/home', [HomeConteroller::class, 'index'])->name('home');
     Route::post('/home', [HomeConteroller::class, 'search'])->name('home.search');
-    Route::post('/home/favori', [ClientConteroller::class, 'favori'])->name('home.like');
+    Route::post('/home/favori', [ClientConteroller::class, 'storefavori'])->name('home.like');
+    Route::get('/home/favoris', [ClientConteroller::class, 'mesFavoris'])->name('client.favoris');
     Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('client.restaurant.show');
 });
 Route::middleware(['restaurateur'])->prefix('restaurateur')->group(function () {

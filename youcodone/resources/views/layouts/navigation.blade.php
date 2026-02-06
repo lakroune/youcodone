@@ -18,7 +18,7 @@
                 @role('client')
                     <a href="{{ route('home') }}"
                         class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Exploration</a>
-                    <a href="#"
+                    <a href="{{ route('client.favoris') }}"
                         class="text-[10px] font-black uppercase tracking-[3px] text-gray-500 hover:text-white transition-all">Mes
                         Favoris</a>
                     <a href="#"
