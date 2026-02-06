@@ -14,10 +14,11 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasChildren, HasRoles;
     protected $guard_name = 'web';
-    
+    protected $childColumn = 'role';
     protected $childTypes = [
         'client' => Client::class,
         'restaurateur' => Restaurateur::class,
+        'admin' => Admin::class
     ];
     /**
      * The attributes that are mass assignable.

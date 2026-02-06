@@ -8,8 +8,8 @@ use Parental\HasParent;
 class Client extends User
 {
     use HasParent;
-    
-    protected $filable = [
+    protected $childColumnValue = 'client';
+    protected $fillable = [
         'username',
         'email',
         'password',
@@ -19,7 +19,7 @@ class Client extends User
         'phone',
     ];
 
-    public function resturants()
+    public function restaurants()
     {
         return  $this->belongsToMany(Restaurant::class, 'favoris', 'user_id', 'restaurant_id')->withTimestamps();
     }

@@ -29,7 +29,7 @@ class Restaurant extends Model
 
     public function clients()
     {
-        return $this->belongsToMany(Client::class, 'favoris', 'restaurant_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(Client::class, 'favoris', 'user_id', 'restaurant_id')->withTimestamps();
     }
 
     public function typeCuisine()

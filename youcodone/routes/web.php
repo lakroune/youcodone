@@ -18,17 +18,17 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::middleware('auth')->prefix('auth')->group(function () {
-   Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
 });
 Route::middleware('client')->prefix('client')->group(function () {
     Route::get('/home', [HomeConteroller::class, 'index'])->name('home');
     Route::post('/home', [HomeConteroller::class, 'search'])->name('home.search');
-    Route::put('/home/favori', [ClientConteroller::class, 'favori'])->name('restaurant.favori');
+    Route::post('/home/favori', [ClientConteroller::class, 'favori'])->name('home.like');
     Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('client.restaurant.show');
 });
 Route::middleware(['restaurateur'])->prefix('restaurateur')->group(function () {
