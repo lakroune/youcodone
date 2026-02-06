@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Restaurateur;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 
 class ProfileController extends Controller
@@ -18,6 +20,12 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        if(Role::findByName('client')->users()->where('id', Auth::id())->exists()){
+            $user = Cli
+        }
+        if(Role::findByName('restaurateur')->users()->where('id', Auth::id())->exists()){
+            $user =  Restaurateur::find(Auth::id()); 
+        }
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
@@ -28,14 +36,16 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $valided = $request->validated();
+        if (Role::findByName('client')->users()->where('id', Auth::id())->exists()) {
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+            $user = Auth::user();
+            $user->update($valided);
         }
-
-        $request->user()->save();
-
+        if (Role::findByName('restaurateur')->users()->where('id', Auth::id())->exists()) {
+            $user = Auth::user();
+            $user->update($valided);
+        }
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
